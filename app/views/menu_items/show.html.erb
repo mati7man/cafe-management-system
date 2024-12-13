@@ -1,0 +1,43 @@
+<div class="card">
+  <% if @menu_item.image_url.present? %>
+    <%= image_tag @menu_item.image_url, class: 'card-img-top', alt: @menu_item.name %>
+  <% end %>
+  
+  <div class="card-body">
+    <h1 class="card-title"><%= @menu_item.name %></h1>
+    
+    <div class="row">
+      <div class="col-md-8">
+        <p class="card-text">
+          <strong>Description:</strong><br>
+          <%= @menu_item.description %>
+        </p>
+
+        <p class="card-text">
+          <strong>Price:</strong>
+          <%= number_to_currency(@menu_item.price) %>
+        </p>
+
+        <p class="card-text">
+          <strong>Category:</strong>
+          <%= link_to @menu_item.category.name, category_path(@menu_item.category) %>
+        </p>
+
+        <p class="card-text">
+          <strong>Preparation Time:</strong>
+          <%= @menu_item.preparation_time %> minutes
+        </p>
+
+        <p class="card-text">
+          <strong>Status:</strong>
+          <%= @menu_item.available ? 'Available' : 'Not Available' %>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-footer">
+    <%= link_to 'Edit', edit_menu_item_path(@menu_item), class: 'btn btn-primary' %>
+    <%= link_to 'Back', menu_items_path, class: 'btn btn-secondary' %>
+  </div>
+</div>

@@ -1,0 +1,44 @@
+<div class="card">
+  <div class="card-header">
+    <h1><%= @category.name %></h1>
+  </div>
+  <div class="card-body">
+    <p>
+      <strong>Description:</strong>
+      <%= @category.description %>
+    </p>
+
+    <p>
+      <strong>Status:</strong>
+      <%= @category.active ? 'Active' : 'Inactive' %>
+    </p>
+
+    <h2>Menu Items in this Category</h2>
+    <% if @category.menu_items.any? %>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Available</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @category.menu_items.each do |item| %>
+            <tr>
+              <td><%= item.name %></td>
+              <td><%= number_to_currency(item.price) %></td>
+              <td><%= item.available ? 'Yes' : 'No' %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <p>No menu items in this category yet.</p>
+    <% end %>
+  </div>
+  <div class="card-footer">
+    <%= link_to 'Edit', edit_category_path(@category), class: 'btn btn-primary' %>
+    <%= link_to 'Back', categories_path, class: 'btn btn-secondary' %>
+  </div>
+</div>

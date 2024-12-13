@@ -1,0 +1,52 @@
+<%= form_with(model: menu_item, local: true) do |form| %>
+  <% if menu_item.errors.any? %>
+    <div class="alert alert-danger">
+      <h2><%= pluralize(menu_item.errors.count, "error") %> prohibited this menu item from being saved:</h2>
+      <ul>
+        <% menu_item.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :name %>
+    <%= form.text_field :name, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :description %>
+    <%= form.text_area :description, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :price %>
+    <%= form.number_field :price, class: 'form-control', step: '0.01' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :category_id %>
+    <%= form.collection_select :category_id, Category.all, :id, :name, {}, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :preparation_time, 'Preparation Time (minutes)' %>
+    <%= form.number_field :preparation_time, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :image_url %>
+    <%= form.text_field :image_url, class: 'form-control' %>
+  </div>
+
+  <div class="form-check mb-3">
+    <%= form.check_box :available, class: 'form-check-input' %>
+    <%= form.label :available, class: 'form-check-label' %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit class: 'btn btn-primary' %>
+    <%= link_to 'Back', menu_items_path, class: 'btn btn-secondary' %>
+  </div>
+<% end %>
